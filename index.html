@@ -123,7 +123,7 @@
             font-size: 1.5rem;
             line-height: 1.8;
             color: #333;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             min-height: 100px;
             display: flex;
             align-items: center;
@@ -135,7 +135,30 @@
             border-radius: 12px;
             padding: 10px;
             box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-            margin: 30px 80px 40px 80px;
+            margin: 30px 80px 20px 80px;
+        }
+
+        /* 分享按钮样式 */
+        .share-btn {
+            background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-btn:active {
+            transform: translateY(0);
         }
 
         /* 按钮样式 */
@@ -242,7 +265,13 @@
                 font-size: 1.2rem;
                 padding: 8px;
                 border-width: 1px;
-                margin: 20px 40px 30px 40px;
+                margin: 20px 40px 15px 40px;
+            }
+            
+            .share-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin-bottom: 15px;
             }
             
             .cat-image {
@@ -267,7 +296,13 @@
                 font-size: 1.1rem;
                 padding: 6px;
                 border-width: 1px;
-                margin: 15px 30px 25px 30px;
+                margin: 15px 30px 12px 30px;
+            }
+            
+            .share-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                margin-bottom: 12px;
             }
             
             .refresh-btn {
@@ -290,6 +325,7 @@
 
     <div class="answer-container">
         <div class="answer-text" id="answerText">点击下方按钮，领取喵的答案</div>
+        <button class="share-btn" id="shareBtn" style="display: none;">分享到朋友圈</button>
         <button class="refresh-btn" id="refreshBtn">喵的答案</button>
     </div>
 
@@ -356,6 +392,7 @@
         const timeDisplay = document.getElementById('timeDisplay');
         const answerText = document.getElementById('answerText');
         const refreshBtn = document.getElementById('refreshBtn');
+        const shareBtn = document.getElementById('shareBtn');
         const catToy = document.getElementById('catToy');
         const catPaw = document.getElementById('catPaw');
 
@@ -401,6 +438,7 @@
             setTimeout(() => {
                 answerText.textContent = getRandomAnswer();
                 answerText.style.opacity = '1';
+                shareBtn.style.display = 'inline-block';
             }, 300);
         }
 
@@ -422,6 +460,30 @@
                 refreshBtn.style.opacity = '0.7';
                 refreshBtn.style.cursor = 'not-allowed';
                 refreshBtn.textContent = '一次只能问一个问题哦';
+            }
+        });
+
+        // 分享到朋友圈功能
+        shareBtn.addEventListener('click', () => {
+            const answer = answerText.textContent;
+            const shareText = `喵主福佑好运茶：${answer}`;
+            const shareUrl = window.location.href;
+            
+            // 微信朋友圈分享
+            if (typeof WeixinJSBridge !== 'undefined') {
+                WeixinJSBridge.invoke('shareTimeline', {
+                    'title': shareText,
+                    'link': shareUrl,
+                    'img_url': 'https://space.coze.cn/s/cEZIpwqkiv0/?width_height=882x883'
+                }, function(res) {
+                    // 分享成功后的回调
+                    if (res.err_msg === 'shareTimeline:ok') {
+                        alert('分享成功！');
+                    }
+                });
+            } else {
+                // 非微信环境下的分享提示
+                alert('请在微信中打开本页面进行分享');
             }
         });
     </script>
