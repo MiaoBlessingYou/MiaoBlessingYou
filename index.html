@@ -124,12 +124,18 @@
             line-height: 1.8;
             color: #333;
             margin-bottom: 40px;
-            min-height: 120px;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
             animation: fadeIn 1s ease-out;
             font-weight: 300;
+            background: linear-gradient(135deg, rgba(245, 245, 245, 0.9) 0%, rgba(250, 250, 250, 0.95) 100%);
+            border: 2px solid #7a5c38;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin: 20px 40px 30px 40px;
         }
 
         /* 按钮样式 */
@@ -244,6 +250,9 @@
             
             .answer-text {
                 font-size: 1.2rem;
+                padding: 12px;
+                border-width: 1px;
+                margin: 15px 20px 25px 20px;
             }
             
             .cat-image {
@@ -266,6 +275,9 @@
             
             .answer-text {
                 font-size: 1.1rem;
+                padding: 10px;
+                border-width: 1px;
+                margin: 10px 15px 20px 15px;
             }
             
             .refresh-btn {
@@ -365,12 +377,18 @@
         const backgroundMusic = new Audio('https://actions.google.com/sounds/v1/ambiences/wind_chime.ogg');
         backgroundMusic.loop = true;
         backgroundMusic.volume = 0.3;
+        backgroundMusic.muted = false;
+        backgroundMusic.preload = 'auto';
 
         soundToggle.addEventListener('click', () => {
             soundEnabled = !soundEnabled;
             soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
             if (soundEnabled) {
-                backgroundMusic.play().catch(e => console.log('背景音乐播放失败:', e));
+                backgroundMusic.play().catch(e => {
+                    console.log('背景音乐播放失败:', e);
+                    // 尝试用户交互后播放
+                    alert('请点击页面任意位置开始播放音乐');
+                });
             } else {
                 backgroundMusic.pause();
             }
@@ -438,15 +456,22 @@
             setInterval(updateTime, 60000); // 每分钟更新一次时间
             // 初始不显示答案
             // 页面加载完成后自动播放背景音乐
-            if (soundEnabled) {
-                backgroundMusic.play().catch(e => console.log('背景音乐自动播放失败:', e));
-            }
+            // 等待用户交互后再尝试播放
+            document.addEventListener('click', () => {
+                if (soundEnabled && backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e => console.log('背景音乐播放失败:', e));
+                }
+            }, { once: true });
         });
 
         // 点击按钮刷新答案
         let clickCount = 0;
         refreshBtn.addEventListener('click', () => {
             if (clickCount === 0) {
+                // 确保音乐播放
+                if (soundEnabled && backgroundMusic.paused) {
+                    backgroundMusic.play().catch(e => console.log('背景音乐播放失败:', e));
+                }
                 playSound(meowSound);
                 showAnswer();
                 clickCount++;
