@@ -138,34 +138,6 @@
             margin: 30px 80px 20px 80px;
         }
 
-        /* 截图按钮样式 */
-        .screenshot-btn {
-            background: linear-gradient(135deg, #c1a685 0%, #a88a66 100%);
-            color: white;
-            border: none;
-            padding: 18px 36px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            margin-bottom: 20px;
-            height: 60px;
-            line-height: 1.5;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .screenshot-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .screenshot-btn:active {
-            transform: translateY(0);
-        }
-
         /* 按钮样式 */
         .refresh-btn {
             background: linear-gradient(135deg, #c1a685 0%, #a88a66 100%);
@@ -275,14 +247,7 @@
                 font-size: 1.2rem;
                 padding: 8px;
                 border-width: 1px;
-                margin: 20px 40px 15px 40px;
-            }
-            
-            .screenshot-btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-                height: 40px;
+                margin: 20px 40px 30px 40px;
             }
             
             .refresh-btn {
@@ -313,14 +278,7 @@
                 font-size: 1.1rem;
                 padding: 6px;
                 border-width: 1px;
-                margin: 15px 30px 12px 30px;
-            }
-            
-            .screenshot-btn {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-                margin-bottom: 12px;
-                height: 35px;
+                margin: 15px 30px 25px 30px;
             }
             
             .refresh-btn {
@@ -349,7 +307,6 @@
 
     <div class="answer-container">
         <div class="answer-text" id="answerText">点击下方按钮，领取喵的答案</div>
-        <button class="screenshot-btn" id="screenshotBtn" style="display: none;">截图保存</button>
         <button class="refresh-btn" id="refreshBtn">喵的答案</button>
     </div>
 
@@ -412,16 +369,10 @@
             "顺其自然，相信未来"
         ];
 
-        // 导入html2canvas库
-        const script = document.createElement('script');
-        script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
-        document.head.appendChild(script);
-
         // 获取DOM元素
         const timeDisplay = document.getElementById('timeDisplay');
         const answerText = document.getElementById('answerText');
         const refreshBtn = document.getElementById('refreshBtn');
-        const screenshotBtn = document.getElementById('screenshotBtn');
         const catToy = document.getElementById('catToy');
         const catPaw = document.getElementById('catPaw');
 
@@ -467,7 +418,6 @@
             setTimeout(() => {
                 answerText.textContent = getRandomAnswer();
                 answerText.style.opacity = '1';
-                screenshotBtn.style.display = 'inline-block';
             }, 300);
         }
 
@@ -490,25 +440,6 @@
                 refreshBtn.style.cursor = 'not-allowed';
                 refreshBtn.textContent = '一次只能问一个问题哦';
             }
-        });
-
-        // 截图保存功能
-        screenshotBtn.addEventListener('click', () => {
-            // 创建截图区域
-            const screenshotArea = document.querySelector('.main-content');
-            
-            // 使用html2canvas库进行截图
-            html2canvas(screenshotArea).then(canvas => {
-                // 创建下载链接
-                const link = document.createElement('a');
-                link.download = '喵主福佑好运茶.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                alert('截图已保存到相册！');
-            }).catch(err => {
-                console.error('截图失败:', err);
-                alert('截图失败，请稍后重试');
-            });
         });
     </script>
 </body>
