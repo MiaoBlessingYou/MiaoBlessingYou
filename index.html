@@ -72,7 +72,7 @@
         .answer-container::before {
             content: '🐾';
             position: absolute;
-            top: 20px;
+            bottom: 20px;
             left: 20px;
             font-size: 2rem;
             opacity: 0.2;
@@ -104,7 +104,7 @@
         .answer-container::before {
             content: '🐾';
             position: absolute;
-            top: 20px;
+            bottom: 20px;
             left: 20px;
             font-size: 2rem;
             opacity: 0.2;
@@ -188,11 +188,6 @@
             cursor: pointer;
             animation: wave 2s ease-in-out infinite;
             z-index: 1000;
-        }
-
-        /* 音效开关 */
-        .sound-toggle {
-            display: none;
         }
 
         /* 动画效果 */
@@ -283,7 +278,6 @@
     </style>
 </head>
 <body>
-    <div class="sound-toggle" id="soundToggle">🔊</div>
     <div class="cat-toy" id="catToy">🎀</div>
     <div class="cat-paw" id="catPaw">🐾</div>
 
@@ -364,37 +358,6 @@
         const refreshBtn = document.getElementById('refreshBtn');
         const catToy = document.getElementById('catToy');
         const catPaw = document.getElementById('catPaw');
-        const soundToggle = document.getElementById('soundToggle');
-
-        // 音效控制
-        let soundEnabled = true;
-        const meowSound = new Audio('https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg');
-        const backgroundMusic = new Audio('https://actions.google.com/sounds/v1/ambiences/wind_chime.ogg');
-        backgroundMusic.loop = true;
-        backgroundMusic.volume = 0.5;
-        backgroundMusic.muted = false;
-        backgroundMusic.preload = 'auto';
-
-        soundToggle.addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
-            if (soundEnabled) {
-                backgroundMusic.play().catch(e => {
-                    console.log('背景音乐播放失败:', e);
-                    // 尝试用户交互后播放
-                    alert('请点击页面任意位置开始播放音乐');
-                });
-            } else {
-                backgroundMusic.pause();
-            }
-        });
-
-        function playSound(sound) {
-            if (soundEnabled) {
-                sound.currentTime = 0;
-                sound.play().catch(e => console.log('音效播放失败:', e));
-            }
-        }
 
         // 猫咪互动效果
         catToy.addEventListener('click', () => {
@@ -402,7 +365,6 @@
             setTimeout(() => {
                 catToy.style.animation = 'float 3s ease-in-out infinite';
             }, 10);
-            playSound(meowSound);
             alert('喵~ 你找到了我的玩具！🎀');
         });
 
@@ -411,7 +373,6 @@
             setTimeout(() => {
                 catPaw.style.animation = 'wave 2s ease-in-out infinite';
             }, 10);
-            playSound(meowSound);
             alert('喵~ 我在这儿呢！🐾');
         });
 
@@ -422,9 +383,7 @@
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric', 
-                weekday: 'long',
-                hour: '2-digit', 
-                minute: '2-digit'
+                weekday: 'long'
             };
             const timeString = now.toLocaleDateString('zh-CN', options);
             timeDisplay.textContent = timeString;
@@ -450,26 +409,12 @@
             updateTime();
             setInterval(updateTime, 60000); // 每分钟更新一次时间
             // 初始不显示答案
-            // 页面加载完成后自动播放背景音乐
-            // 等待用户交互后再尝试播放
-            document.addEventListener('click', () => {
-                if (soundEnabled && backgroundMusic.paused) {
-                    backgroundMusic.play().catch(e => {
-                        console.log('背景音乐播放失败:', e);
-                    });
-                }
-            }, { once: true });
         });
 
         // 点击按钮刷新答案
         let clickCount = 0;
         refreshBtn.addEventListener('click', () => {
             if (clickCount === 0) {
-                // 确保音乐播放
-                if (soundEnabled && backgroundMusic.paused) {
-                    backgroundMusic.play().catch(e => console.log('背景音乐播放失败:', e));
-                }
-                playSound(meowSound);
                 showAnswer();
                 clickCount++;
             } else {
