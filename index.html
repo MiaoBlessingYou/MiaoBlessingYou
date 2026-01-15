@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喵主福佑好运茶</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f8f4e9 0%, #e8dcc5 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 顶部标题 */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #7a5c38;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .decorative {
+            font-size: 1.2rem;
+            color: #9b7b53;
+            font-style: italic;
+        }
+
+        /* 时间显示 */
+        .time-display {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #7a5c38;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* 答案展示区域 */
+        .answer-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-container::before {
+            content: '🐾';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .answer-container::after {
+            content: '🍵';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        /* 答案展示区域 */
+        .answer-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-container::before {
+            content: '🐾';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .answer-container::after {
+            content: '🍵';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .answer-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 40px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-out;
+            font-weight: 300;
+        }
+
+        /* 按钮样式 */
+        .refresh-btn {
+            background: linear-gradient(135deg, #c1a685 0%, #a88a66 100%);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            font-weight: 500;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .refresh-btn:active {
+            transform: translateY(0);
+        }
+
+        /* 底部信息 */
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #7a5c38;
+            font-size: 0.9rem;
+        }
+
+        /* 猫咪互动元素 */
+        .cat-toy {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1000;
+        }
+
+        .cat-paw {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            animation: wave 2s ease-in-out infinite;
+            z-index: 1000;
+        }
+
+        /* 音效开关 */
+        .sound-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .answer-container {
+                padding: 20px;
+            }
+            
+            .answer-text {
+                font-size: 1.2rem;
+            }
+            
+            .cat-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .answer-text {
+                font-size: 1.1rem;
+            }
+            
+            .refresh-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sound-toggle" id="soundToggle">🔊</div>
+    <div class="cat-toy" id="catToy">🎀</div>
+    <div class="cat-paw" id="catPaw">🐾</div>
+
+    <div class="header">
+        <h1>喵主福佑好运茶</h1>
+        <p class="decorative">🍃 一杯茶，一份智慧，喵主为你指引方向 🍃</p>
+    </div>
+
+    <div class="time-display" id="timeDisplay">加载中...</div>
+
+    <div class="answer-container">
+        <div class="answer-text" id="answerText">点击下方按钮，领取喵的答案</div>
+        <button class="refresh-btn" id="refreshBtn">喵的答案</button>
+    </div>
+
+    <div class="footer">
+        <p>喵的陪伴，好运常伴</p>
+    </div>
+
+    <script>
+        // 答案库（包含50条富有哲理的积极治愈答案）
+        const answers = [
+            "你的努力，时光会给你答案",
+            "你值得拥有所有美好的事物",
+            "放下过去，拥抱未来",
+            "不必强求，顺其自然就是最好的安排",
+            "耐心等待，一切都会好起来",
+            "现在就去做，不要犹豫",
+            "不要灰心，坚持下去",
+            "保持希望，未来可期",
+            "继续前进，你可以的",
+            "相信自己，你很优秀",
+            "保持微笑，积极面对",
+            "跟随内心，相信直觉",
+            "享受当下，珍惜现在",
+            "勇敢一点，抓住机会",
+            "慢慢来，不要着急",
+            "保持冷静，相信过程",
+            "善待自己，不要自责",
+            "保持乐观，继续努力",
+            "果断行动，抓住机遇",
+            "专注当下，心无旁骛",
+            "耐心等待，远离焦虑",
+            "平和心态，控制情绪",
+            "保持善良，不计较",
+            "心怀感恩，少抱怨",
+            "热情似火，拒绝冷漠",
+            "真诚待人，真实自我",
+            "勇敢无畏，无所畏惧",
+            "坚强不屈，内心强大",
+            "自信满满，告别自卑",
+            "谦逊有礼，戒骄戒躁",
+            "笑对人生，积极向上",
+            "释怀过往，活在当下",
+            "珍惜拥有，勇敢追梦",
+            "从容不迫，顺其自然",
+            "冷静思考，相信未来",
+            "你很棒，继续努力",
+            "乐观豁达，享受过程",
+            "坚持不懈，勇往直前",
+            "永不言弃，砥砺前行",
+            "自信从容，保持希望",
+            "静待花开，即刻启程",
+            "勿失初心，砥砺前行",
+            "一切都会好起来，保持耐心",
+            "不要放弃，相信自己",
+            "积极面对，保持微笑",
+            "放下过去，拥抱全新的自己",
+            "享受当下，珍惜每一刻",
+            "勇敢追梦，永不言弃",
+            "从容不迫，冷静思考",
+            "顺其自然，相信未来"
+        ];
+
+        // 获取DOM元素
+        const timeDisplay = document.getElementById('timeDisplay');
+        const answerText = document.getElementById('answerText');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const catToy = document.getElementById('catToy');
+        const catPaw = document.getElementById('catPaw');
+        const soundToggle = document.getElementById('soundToggle');
+
+        // 音效控制
+        let soundEnabled = true;
+        const meowSound = new Audio('https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg');
+        const clickSound = new Audio('https://actions.google.com/sounds/v1/ambiences/wind_chime.ogg');
+
+        soundToggle.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            soundToggle.textContent = soundEnabled ? '🔊' : '🔇';
+        });
+
+        function playSound(sound) {
+            if (soundEnabled) {
+                sound.currentTime = 0;
+                sound.play().catch(e => console.log('音效播放失败:', e));
+            }
+        }
+
+        // 猫咪互动效果
+        catToy.addEventListener('click', () => {
+            catToy.style.animation = 'none';
+            setTimeout(() => {
+                catToy.style.animation = 'float 3s ease-in-out infinite';
+            }, 10);
+            playSound(meowSound);
+            alert('喵~ 你找到了我的玩具！🎀');
+        });
+
+        catPaw.addEventListener('click', () => {
+            catPaw.style.animation = 'none';
+            setTimeout(() => {
+                catPaw.style.animation = 'wave 2s ease-in-out infinite';
+            }, 10);
+            playSound(meowSound);
+            alert('喵~ 我在这儿呢！🐾');
+        });
+
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                weekday: 'long',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit'
+            };
+            const timeString = now.toLocaleDateString('zh-CN', options);
+            timeDisplay.textContent = timeString;
+        }
+
+        // 随机获取答案
+        function getRandomAnswer() {
+            const randomIndex = Math.floor(Math.random() * answers.length);
+            return answers[randomIndex];
+        }
+
+        // 显示答案的函数
+        function showAnswer() {
+            answerText.style.opacity = '0';
+            setTimeout(() => {
+                answerText.textContent = getRandomAnswer();
+                answerText.style.opacity = '1';
+            }, 300);
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            updateTime();
+            setInterval(updateTime, 1000); // 每秒更新时间
+            // 初始不显示答案
+        });
+
+        // 点击按钮刷新答案
+        let clickCount = 0;
+        refreshBtn.addEventListener('click', () => {
+            if (clickCount === 0) {
+                playSound(clickSound);
+                showAnswer();
+                clickCount++;
+            } else {
+                refreshBtn.disabled = true;
+                refreshBtn.style.opacity = '0.7';
+                refreshBtn.style.cursor = 'not-allowed';
+                refreshBtn.textContent = '一次只能问一个问题哦';
+            }
+        });
+    </script>
+</body>
+</html>
