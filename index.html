@@ -3,448 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>喵主福佑好运茶</title>
+    <title>华为Mate X7 签卡</title>
     <style>
         /* 全局样式 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
         body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: linear-gradient(135deg, #f8f4e9 0%, #e8dcc5 100%);
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'SimHei', sans-serif;
+            background: linear-gradient(135deg, #ff4d4f 0%, #ff7a45 50%, #ffc107 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            color: #fff;
         }
 
-        /* 顶部标题 */
-        .header {
+        /* 页面容器 */
+        .container {
+            max-width: 600px;
+            width: 100%;
             text-align: center;
+        }
+
+        /* 标题区域 */
+        .header {
             margin-bottom: 30px;
             animation: fadeInDown 1s ease-out;
         }
 
-        .header h1 {
+        h1 {
             font-size: 2.5rem;
-            color: #7a5c38;
+            color: #fff;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #fff 0%, #ffc107 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .header .decorative {
-            font-size: 1.1rem;
-            color: #9b7b53;
+        .subtitle {
+            font-size: 1.2rem;
+            color: #fff;
             font-style: italic;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* 时间显示 */
-        .time-display {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #7a5c38;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* 答案展示区域 */
-        .answer-container {
+        /* 签卡区域 */
+        .card-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: fadeInUp 1s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .answer-container::before {
-            content: '🐾';
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            font-size: 2rem;
-            opacity: 0.2;
-        }
-
-        .answer-container::after {
-            content: '🍵';
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 2rem;
-            opacity: 0.2;
-        }
-
-        /* 答案展示区域 */
-        .answer-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .answer-container::before {
-            content: '🐾';
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            font-size: 2rem;
-            opacity: 0.2;
-        }
-
-        .answer-container::after {
-            content: '🍵';
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 2rem;
-            opacity: 0.2;
-        }
-
-        .answer-text {
-            font-size: 1.5rem;
-            line-height: 1.8;
-            color: #333;
-            margin-bottom: 20px;
-            min-height: 100px;
+            backdrop-filter: blur(10px);
+            border: 4px solid #ff4d4f;
+            min-height: 300px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 1s ease-out;
-            font-weight: 300;
-            background: linear-gradient(135deg, rgba(220, 215, 205, 0.9) 0%, rgba(235, 230, 220, 0.95) 100%);
-            border: 2px solid #7a5c38;
-            border-radius: 12px;
-            padding: 10px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-            margin: 30px 80px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 77, 79, 0.1), transparent);
+            animation: rotate 3s linear infinite;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 签文样式 */
+        #fortune-level {
+            font-size: 1.5rem;
+            color: #ff4d4f;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 77, 79, 0.5);
+        }
+
+        #fortune-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #333;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #fff 0%, #fafafa 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ff4d4f;
+            border-right: 4px solid #ff4d4f;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #fortune-blessing {
+            font-size: 1.2rem;
+            color: #ff4d4f;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* 权益区域 */
+        .benefits {
+            background: linear-gradient(135deg, #ff4d4f 0%, #ff7a45 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefits h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .benefits ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .benefits li {
+            color: #fff;
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .benefits li::before {
+            content: '🎁';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
         }
 
         /* 按钮样式 */
-        .refresh-btn {
-            background: linear-gradient(135deg, #c1a685 0%, #a88a66 100%);
-            color: white;
+        .button-container {
+            margin: 30px 0;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff4d4f 0%, #ff7a45 100%);
+            color: #fff;
             border: none;
-            padding: 18px 36px;
-            font-size: 1.2rem;
+            padding: 15px 30px;
+            font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            font-weight: 500;
-            height: 60px;
-            line-height: 1.5;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 5px 15px rgba(255, 77, 79, 0.3);
+            margin: 0 10px;
+            font-weight: bold;
         }
 
-        .refresh-btn:hover {
+        button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(255, 77, 79, 0.4);
         }
 
-        .refresh-btn:active {
+        button:active {
             transform: translateY(0);
         }
 
-        /* 底部信息 */
+        /* 页脚 */
         .footer {
-            margin-top: 30px;
-            text-align: center;
-            color: #7a5c38;
+            margin-top: 50px;
+            color: #fff;
             font-size: 0.9rem;
-        }
-
-        /* 猫咪互动元素 */
-        .cat-toy {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            animation: float 3s ease-in-out infinite;
-            z-index: 1000;
-        }
-
-        .cat-paw {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            animation: wave 2s ease-in-out infinite;
-            z-index: 1000;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         /* 动画效果 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* 响应式设计 */
         @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .card-container {
+                padding: 20px;
+            }
+            
+            #fortune-text {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+            
+            button {
+                padding: 12px 24px;
+                font-size: 1rem;
+                margin: 10px 5px;
+            }
+        }
+
+        /* 小屏幕手机适配 */
+        @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
             
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header .decorative {
-                font-size: 1rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            
-            .answer-container {
-                padding: 20px;
-            }
-            
-            .answer-text {
-                font-size: 1.2rem;
-                padding: 8px;
-                border-width: 1px;
-                margin: 20px 40px 30px 40px;
-            }
-            
-            .refresh-btn {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                height: 40px;
-            }
-            
-            .cat-image {
-                width: 150px;
-                height: 150px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
+            h1 {
                 font-size: 1.8rem;
             }
             
-            .header .decorative {
-                font-size: 0.95rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+            .card-container {
+                padding: 15px;
+                margin: 15px 0;
             }
             
-            .answer-text {
-                font-size: 1.1rem;
-                padding: 6px;
-                border-width: 1px;
-                margin: 15px 30px 25px 30px;
-            }
-            
-            .refresh-btn {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-                height: 35px;
-            }
-            
-            .refresh-btn {
-                padding: 12px 24px;
+            #fortune-text {
                 font-size: 1rem;
+                padding: 10px;
+            }
+            
+            button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                width: 100%;
+                margin: 10px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="cat-toy" id="catToy">🎀</div>
-    <div class="cat-paw" id="catPaw">🐾</div>
+    <div class="container">
+        <!-- 标题区域 -->
+        <div class="header">
+            <h1>华为Mate X7 签卡</h1>
+            <p class="subtitle">展启新程，智享吉运</p>
+        </div>
 
-    <div class="header">
-        <h1>喵主福佑好运茶</h1>
-        <p class="decorative">🍃 一杯茶，一份智慧，喵主为你指引方向 🍃</p>
-    </div>
+        <!-- 签卡区域 -->
+        <div class="card-container">
+            <div class="card-content">
+                <div id="fortune-level"></div>
+                <div id="fortune-text"></div>
+                <div id="fortune-blessing"></div>
+            </div>
+        </div>
 
-    <div class="time-display" id="timeDisplay">加载中...</div>
+        <!-- 权益区域 -->
+        <div class="benefits">
+            <h3>专属权益</h3>
+            <ul id="benefits-list"></ul>
+        </div>
 
-    <div class="answer-container">
-        <div class="answer-text" id="answerText">点击下方按钮，领取喵的答案</div>
-        <button class="refresh-btn" id="refreshBtn">喵的答案</button>
-    </div>
+        <!-- 按钮区域 -->
+        <div class="button-container">
+            <button id="refreshBtn">再抽一签</button>
+        </div>
 
-    <div class="footer">
-        <p>喵的陪伴，好运常伴</p>
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>© 2025 华为Mate X7 | 展启新程，智享吉运</p>
+        </div>
     </div>
 
     <script>
-        // 答案库（包含50条富有哲理的积极治愈答案）
-        const answers = [
-            "你的努力，时光会给你答案",
-            "你值得拥有所有美好的事物",
-            "放下过去，拥抱未来",
-            "不必强求，顺其自然就是最好的安排",
-            "耐心等待，一切都会好起来",
-            "现在就去做，不要犹豫",
-            "不要灰心，坚持下去",
-            "保持希望，未来可期",
-            "继续前进，你可以的",
-            "相信自己，你很优秀",
-            "保持微笑，积极面对",
-            "跟随内心，相信直觉",
-            "享受当下，珍惜现在",
-            "勇敢一点，抓住机会",
-            "慢慢来，不要着急",
-            "保持冷静，相信过程",
-            "善待自己，不要自责",
-            "保持乐观，继续努力",
-            "果断行动，抓住机遇",
-            "专注当下，心无旁骛",
-            "耐心等待，远离焦虑",
-            "平和心态，控制情绪",
-            "保持善良，不计较",
-            "心怀感恩，少抱怨",
-            "热情似火，拒绝冷漠",
-            "真诚待人，真实自我",
-            "勇敢无畏，无所畏惧",
-            "坚强不屈，内心强大",
-            "自信满满，告别自卑",
-            "谦逊有礼，戒骄戒躁",
-            "笑对人生，积极向上",
-            "释怀过往，活在当下",
-            "珍惜拥有，勇敢追梦",
-            "从容不迫，顺其自然",
-            "冷静思考，相信未来",
-            "你很棒，继续努力",
-            "乐观豁达，享受过程",
-            "坚持不懈，勇往直前",
-            "永不言弃，砥砺前行",
-            "自信从容，保持希望",
-            "静待花开，即刻启程",
-            "勿失初心，砥砺前行",
-            "一切都会好起来，保持耐心",
-            "不要放弃，相信自己",
-            "积极面对，保持微笑",
-            "放下过去，拥抱全新的自己",
-            "享受当下，珍惜每一刻",
-            "勇敢追梦，永不言弃",
-            "从容不迫，冷静思考",
-            "顺其自然，相信未来"
-        ];
+        // 签卡数据
+        const fortunes = {
+            '上上签': {
+                'probability': 10,
+                'blessings': ['大展鸿图', '启运纳福'],
+                'texts': [
+                    '鸿蒙启运，Mate X7 玄武架构展硬核吉运，红枫影像定格世间福泽，所求皆展颜，所行皆坦途',
+                    '大展鸿图，折叠屏开万象新，双卫星通信连福运，鸿蒙 6 智驭全局，万事皆顺遂',
+                    '鸿运盈门，Mate X7 麒麟算力满格吉运，云锦工艺凝光聚福，展卷皆美好，阖屏皆平安',
+                    '智运当头，A2A 智能体协通百顺，分屏联动解锁高效福，折叠启新程，万事皆可期'
+                ],
+                'benefits': [
+                    'Mate X7 专属玄武钢化昆仑玻璃免费贴膜 1 次',
+                    '云锦工艺周边 1 份',
+                    'Mate X7 深度体验 + 专属伴手礼'
+                ]
+            },
+            '上吉签': {
+                'probability': 20,
+                'blessings': ['展吉添喜', '智享顺意'],
+                'texts': [
+                    '吉运临门，Mate X7 红枫影像一拍纳喜，分屏联动办公添顺，展屏皆高效，阖屏皆安心',
+                    '展福添喜，折叠悬停解锁创作吉运，小艺慧记录尽福事，日常皆顺遂，创作皆出彩',
+                    '智享吉运，Mate X7 跨屏流转通福泽，大屏护眼护安康，事事皆圆满，好物伴身旁',
+                    '福运随行，潜望长焦揽尽远方吉，AI 追焦定格身边喜，展卷观万象，福运皆入怀'
+                ],
+                'benefits': [
+                    'Mate X7 专属保护套 / 手写笔 8 折券',
+                    '鸿蒙跨设备协同体验 30 分钟',
+                    '服务日 Mate X7 免手工费'
+                ]
+            },
+            '中吉签': {
+                'probability': 40,
+                'blessings': ['展顺常伴', '平安护运'],
+                'texts': [
+                    '顺意常伴，Mate X7 巨鲸续航满格运，快充速补福能量，日常无焦虑，出行皆顺意',
+                    '展顺添福，玄武水滴铰链护机平安，IP59 防尘防水守吉运，小福常临门，万事皆平顺',
+                    '平安护运，Mate X7 护眼大屏守身心，隐私保护藏福泽，日常无烦忧，使用皆安心',
+                    '焕运随行，Mate X7 屏幕检测焕新颜，清洁养护纳新运，小事皆圆满，大运在路上'
+                ],
+                'benefits': [
+                    'Mate X7 免费深度清洁 + 屏幕检测',
+                    '鸿蒙办公小工具会员 7 天体验',
+                    '华为云空间扩容券'
+                ]
+            },
+            '吉祥签': {
+                'probability': 30,
+                'blessings': ['小运积福', '折叠纳安'],
+                'texts': [
+                    '小运常临，Mate X7 折叠形态藏小福，日常开合积吉运，集签纳好礼，福运节节高',
+                    '平安积福，鸿蒙隐私保护护财安，亲情防诈守家福，小福常相伴，万事皆平安',
+                    '折叠纳安，Mate X7 单手开合添顺意，便携设计伴出行，步步皆安稳，事事皆顺心',
+                    '福运积藏，大屏小屏随心切换吉，日常使用皆顺意，积少成多福，吉运自然来'
+                ],
+                'benefits': [
+                    '集签积分 1 分',
+                    'Mate X7 门店体验打卡积分翻倍',
+                    '门店轻福利（饮用水 / 小零食）'
+                ]
+            }
+        };
 
-        // 获取DOM元素
-        const timeDisplay = document.getElementById('timeDisplay');
-        const answerText = document.getElementById('answerText');
+        // DOM元素
+        const fortuneLevelElement = document.getElementById('fortune-level');
+        const fortuneTextElement = document.getElementById('fortune-text');
+        const fortuneBlessingElement = document.getElementById('fortune-blessing');
+        const benefitsListElement = document.getElementById('benefits-list');
         const refreshBtn = document.getElementById('refreshBtn');
-        const catToy = document.getElementById('catToy');
-        const catPaw = document.getElementById('catPaw');
 
-        // 猫咪互动效果
-        catToy.addEventListener('click', () => {
-            catToy.style.animation = 'none';
-            setTimeout(() => {
-                catToy.style.animation = 'float 3s ease-in-out infinite';
-            }, 10);
-            alert('喵~ 你找到了我的玩具！🎀');
-        });
+        // 随机获取签卡
+        function getRandomFortune() {
+            // 生成随机数
+            const random = Math.random() * 100;
+            let cumulativeProbability = 0;
 
-        catPaw.addEventListener('click', () => {
-            catPaw.style.animation = 'none';
-            setTimeout(() => {
-                catPaw.style.animation = 'wave 2s ease-in-out infinite';
-            }, 10);
-            alert('喵~ 我在这儿呢！🐾');
-        });
+            // 根据概率选择签卡级别
+            for (const level in fortunes) {
+                cumulativeProbability += fortunes[level].probability;
+                if (random <= cumulativeProbability) {
+                    return level;
+                }
+            }
 
-        // 更新时间显示
-        function updateTime() {
-            const now = new Date();
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                weekday: 'long'
-            };
-            const timeString = now.toLocaleDateString('zh-CN', options);
-            timeDisplay.textContent = timeString;
+            // 默认返回吉祥签
+            return '吉祥签';
         }
 
-        // 随机获取答案
-        function getRandomAnswer() {
-            const randomIndex = Math.floor(Math.random() * answers.length);
-            return answers[randomIndex];
-        }
+        // 显示签卡
+        function showFortune() {
+            const level = getRandomFortune();
+            const fortune = fortunes[level];
 
-        // 显示答案的函数
-        function showAnswer() {
-            answerText.style.opacity = '0';
+            // 随机选择签文和吉语
+            const randomTextIndex = Math.floor(Math.random() * fortune.texts.length);
+            const randomBlessingIndex = Math.floor(Math.random() * fortune.blessings.length);
+
+            // 显示签卡信息
+            fortuneLevelElement.textContent = level;
+            fortuneTextElement.textContent = fortune.texts[randomTextIndex];
+            fortuneBlessingElement.textContent = fortune.blessings[randomBlessingIndex];
+
+            // 显示权益
+            benefitsListElement.innerHTML = '';
+            fortune.benefits.forEach(benefit => {
+                const li = document.createElement('li');
+                li.textContent = benefit;
+                benefitsListElement.appendChild(li);
+            });
+
+            // 添加动画效果
+            fortuneLevelElement.style.opacity = '0';
+            fortuneTextElement.style.opacity = '0';
+            fortuneBlessingElement.style.opacity = '0';
+
             setTimeout(() => {
-                answerText.textContent = getRandomAnswer();
-                answerText.style.opacity = '1';
+                fortuneLevelElement.style.opacity = '1';
+                fortuneTextElement.style.opacity = '1';
+                fortuneBlessingElement.style.opacity = '1';
             }, 300);
         }
 
-        // 页面加载完成后初始化
+        // 页面加载完成后显示签卡
         window.addEventListener('load', () => {
-            updateTime();
-            setInterval(updateTime, 60000); // 每分钟更新一次时间
-            // 初始不显示答案
+            setTimeout(showFortune, 500);
         });
 
-        // 点击按钮刷新答案
-        let clickCount = 0;
-        refreshBtn.addEventListener('click', () => {
-            if (clickCount === 0) {
-                showAnswer();
-                clickCount++;
-            } else {
-                refreshBtn.disabled = true;
-                refreshBtn.style.opacity = '0.7';
-                refreshBtn.style.cursor = 'not-allowed';
-                refreshBtn.textContent = '一次只能问一个问题哦';
-            }
-        });
+        // 刷新按钮点击事件
+        refreshBtn.addEventListener('click', showFortune);
     </script>
 </body>
 </html>
